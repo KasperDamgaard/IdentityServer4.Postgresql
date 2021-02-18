@@ -27,7 +27,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			using (var session = db.Store.LightweightSession())
 			{
 				var store = new ResourceStore(session);
-				var foundresource = await store.FindApiResourceByNameAsync(apiResource.Name);
+				var foundresource = await store.FindApiResourceAsync(apiResource.Name);
 				Assert.NotNull(foundresource);
 				Assert.Equal(apiResource.Name, foundresource.Name);
 			}
@@ -50,7 +50,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			{
 				var store = new ResourceStore(session);
 				var _scopes = apiResources.Select(y => y.Name);
-				var result = await store.FindApiResourcesByScopeNameAsync(_scopes);
+				var result = await store.FindApiResourcesByScopeAsync(_scopes);
 				Assert.True(apiResources.Count == result.Count());
 			}
 		}
@@ -70,7 +70,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			{
 				var store = new ResourceStore(session);
 				var scopes = resources.Select(x => x.Name);
-				var result = await store.FindIdentityResourcesByScopeNameAsync(scopes);
+				var result = await store.FindIdentityResourcesByScopeAsync(scopes);
 				Assert.True(resources.Count == result.Count());
 			}
 		}

@@ -17,9 +17,9 @@ namespace IdentityServer4.Contrib.Postgresql.Stores
             _documentSession = documentSession;
         }
 
-        public async Task<IEnumerable<PersistedGrant>> GetAllAsync(PersistedGrantFilter filter)
+        public async Task<IEnumerable<PersistedGrant>> GetAllAsync(string subjectId)
         {
-            var grants = await _documentSession.Query<Entities.PersistedGrant>().Where(x => x.SubjectId == filter.SubjectId).ToListAsync().ConfigureAwait(false);
+            var grants = await _documentSession.Query<Entities.PersistedGrant>().Where(x => x.SubjectId == subjectId).ToListAsync().ConfigureAwait(false);
             return grants.Select(y => y.ToModel());
         }
 
@@ -35,9 +35,9 @@ namespace IdentityServer4.Contrib.Postgresql.Stores
             return _documentSession.SaveChangesAsync();
         }
 
-        public Task RemoveAllAsync(PersistedGrantFilter filter)
+        public Task RemoveAllAsync(string subjectId, string clientId, string type)
         {
-            _documentSession.DeleteWhere<Entities.PersistedGrant>(grant => grant.Type == filter.Type && grant.SubjectId == filter.SubjectId && grant.ClientId == filter.ClientId);
+            _documentSession.DeleteWhere<Entities.PersistedGrant>(grant => grant.Type == type && grant.SubjectId == subjectId && grant.ClientId == clientId);
             return _documentSession.SaveChangesAsync();
         }
 

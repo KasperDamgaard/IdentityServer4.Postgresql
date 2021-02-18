@@ -49,7 +49,7 @@ namespace IdentityServer4.Contrib.Postgresql.Sample
 				if (!session.Query<Entities.ApiResource>().Any())
 				{
 					var resources = new List<Entities.ApiResource> {
-					 new Entities.ApiResource{ Name = "api1" , Description = "Api" , DisplayName ="api1" , Scopes = new List<ApiScope> { new ApiScope { Name = "api1" , DisplayName ="api1"  } } },
+					 new Entities.ApiResource{ Name = "api1" , Description = "Api" , DisplayName ="api1" , Scopes = new List<ApiScopeResource> { new ApiScopeResource { Name = "api1" , DisplayName ="api1"  } } },
 
 					};
 					session.StoreObjects(resources);

@@ -12,7 +12,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests
             
 			this.Store = DocumentStore.For(c => 
             {
-                c.Connection($"User ID={GetEnv("PG_USER","postgres")};Password={GetEnv("PG_PASSWORD","postgres")};Host={GetEnv("PG_HOST","localhost")};Port={GetEnv("PG_PORT","5432")};Database={GetEnv("PG_DATABASE","idsrv4_test")};");
+                c.Connection($"User ID={GetEnv("PG_USER","postgres")};Password={GetEnv("PG_PASSWORD","password")};Host={GetEnv("PG_HOST","localhost")};Port={GetEnv("PG_PORT","5432")};Database={GetEnv("PG_DATABASE","idsrv4_test")};");
                 c.PLV8Enabled = false;
                 
             });

@@ -67,8 +67,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
             using (var session = martenFixture.Store.LightweightSession())
             {
                 var _store = new PersistedGrantStore(session);
-                var filter = new PersistedGrantFilter() { SubjectId = subject };
-                var foundGrants =  _store.GetAllAsync(filter).Result;
+                var foundGrants =  _store.GetAllAsync(subject).Result;
                 Assert.True(foundGrants.Count() == count);
             }
         }
@@ -106,8 +105,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
             using (var session = martenFixture.Store.LightweightSession())
             {
                 var _store = new PersistedGrantStore(session);
-                var filter = new PersistedGrantFilter() { SubjectId = persistedGrant.SubjectId, ClientId = persistedGrant.ClientId, Type = persistedGrant.Type };
-                _store.RemoveAllAsync(filter).Wait();
+                _store.RemoveAllAsync(persistedGrant.SubjectId, persistedGrant.ClientId, persistedGrant.Type).Wait();
                 var grants = session.Query<PersistedGrant>().Where(x => x.SubjectId == persistedGrant.SubjectId && x.ClientId == persistedGrant.ClientId && x.Type == persistedGrant.Type).ToList();
                 Assert.True(grants.Count == 0);
             }
