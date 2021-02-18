@@ -1,9 +1,15 @@
+using System;
 using System.Collections.Generic;
 
 namespace IdentityServer4.Contrib.Postgresql.Entities
 {
-    public class ApiScope
+    public class ApiScopeResource : EntityKey
     {
+        public ApiScopeResource()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
         public string Name { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }

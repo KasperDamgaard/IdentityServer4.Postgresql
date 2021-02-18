@@ -15,7 +15,7 @@ namespace IdentityServer4.Contrib.Postgresql.Entities
         public string DisplayName { get; set; }
         public string Description { get; set; }
         public List<ApiSecret> Secrets { get; set; }
-        public List<ApiScope> Scopes { get; set; }
+        public List<ApiScopeResource> Scopes { get; set; }
         public List<ApiResourceClaim> UserClaims { get; set; }
     }
 }

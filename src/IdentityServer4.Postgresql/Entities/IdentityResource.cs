@@ -18,6 +18,7 @@ namespace IdentityServer4.Contrib.Postgresql.Entities
         public bool Emphasize { get; set; }
         public bool ShowInDiscoveryDocument { get; set; } = true;
         public List<IdentityClaim> UserClaims { get; set; }
+        public IDictionary<string, string> Properties { get; set; }
     }
 
 }

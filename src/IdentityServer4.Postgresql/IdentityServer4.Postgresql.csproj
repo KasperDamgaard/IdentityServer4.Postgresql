@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Description>Marten persistence layer for IdentityServer4 using PostgreSQL as a document store</Description>
     <VersionPrefix></VersionPrefix>
-    <Version>3.0.0</Version>
-    <Authors>Sifiso Shezi;unusual-thoughts</Authors>
+    <Version>4.0.0</Version>
+    <Authors>Sifiso Shezi;unusual-thoughts;Rhaea</Authors>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>IdentityServer4.Contrib.Postgresql</AssemblyName>
-    <PackageId>IdentityServer4.Contrib.Postgresql</PackageId>
-    <PackageTags>OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;Postgresql</PackageTags>
+    <AssemblyName>IdentityServer4.Contrib.Postgresql.kld</AssemblyName>
+    <PackageId>IdentityServer4.Contrib.Postgresql.kld</PackageId>
+    <PackageTags>OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;Postgresql;Marten</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/unusual-thoughts/IdentityServer4.Postgresql/nuget/icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/unusual-thoughts/IdentityServer4.Postgresql</PackageProjectUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -16,8 +16,8 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" Version="3.1.2" />
-    <PackageReference Include="Marten" Version="3.10.0" />
+    <PackageReference Include="IdentityServer4" Version="4.0.0" />
+    <PackageReference Include="Marten" Version="3.12.1" />
     <PackageReference Include="AutoMapper" Version="8.0.0" />
   </ItemGroup>
 

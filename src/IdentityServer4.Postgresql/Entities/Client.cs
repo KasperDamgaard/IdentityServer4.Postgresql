@@ -13,7 +13,8 @@ namespace IdentityServer4.Contrib.Postgresql.Entities
 		}
 		public bool Enabled { get; set; } = true;
 		public string ClientId { get; set; }
-		public string ProtocolType { get; set; } = ProtocolTypes.OpenIdConnect;
+		public ICollection<string> AllowedIdentityTokenSigningAlgorithms { get; set; }
+		public string ProtocolType { get; set; } = ProtocolTypes.OpenIdConnect;		
 		public List<ClientSecret> ClientSecrets { get; set; }
 		public bool RequireClientSecret { get; set; } = true;
 		public string ClientName { get; set; }
@@ -45,6 +46,7 @@ namespace IdentityServer4.Contrib.Postgresql.Entities
 		public bool IncludeJwtId { get; set; }
 		public List<ClientClaim> Claims { get; set; }
 		public bool AlwaysSendClientClaims { get; set; }
+		public bool RequireRequestObject { get; set; }
 		public bool PrefixClientClaims { get; set; } = true;
 		public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
 		public bool AlwaysIncludeUserClaimsInIdToken { get; set; }

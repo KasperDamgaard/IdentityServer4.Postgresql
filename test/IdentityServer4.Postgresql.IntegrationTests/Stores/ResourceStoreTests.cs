@@ -27,7 +27,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			using (var session = db.Store.LightweightSession())
 			{
 				var store = new ResourceStore(session);
-				var foundresource = await store.FindApiResourceAsync(apiResource.Name);
+				var foundresource = await store.FindApiResourceByNameAsync(apiResource.Name);
 				Assert.NotNull(foundresource);
 				Assert.Equal(apiResource.Name, foundresource.Name);
 			}
@@ -36,7 +36,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 		public async Task FindApiResourcesByScopeAsync_ShouldFindByScopes()
 		{
 			A.Configure<ApiResource>().Fill(x => x.UserClaims, A.ListOf<ApiResourceClaim>(2));
-			A.Configure<ApiResource>().Fill(x => x.Scopes, A.ListOf<ApiScope>());
+			A.Configure<ApiResource>().Fill(x => x.Scopes, A.ListOf<ApiScopeResource>());
 
 
 			var apiResources = A.ListOf<ApiResource>(5);
@@ -50,7 +50,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			{
 				var store = new ResourceStore(session);
 				var _scopes = apiResources.Select(y => y.Name);
-				var result = await store.FindApiResourcesByScopeAsync(_scopes);
+				var result = await store.FindApiResourcesByScopeNameAsync(_scopes);
 				Assert.True(apiResources.Count == result.Count());
 			}
 		}
@@ -70,7 +70,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			{
 				var store = new ResourceStore(session);
 				var scopes = resources.Select(x => x.Name);
-				var result = await store.FindIdentityResourcesByScopeAsync(scopes);
+				var result = await store.FindIdentityResourcesByScopeNameAsync(scopes);
 				Assert.True(resources.Count == result.Count());
 			}
 		}
@@ -80,7 +80,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 		{
 
 			var claims = A.ListOf<ApiResourceClaim>(2);
-			var scopes = A.ListOf<ApiScope>();
+			var scopes = A.ListOf<ApiScopeResource>();
 			A.Configure<ApiResource>().Fill(x => x.UserClaims, claims);
 			A.Configure<ApiResource>().Fill(x => x.Scopes, scopes);
 			A.Configure<IdentityResource>().Fill(x => x.UserClaims, A.ListOf<IdentityClaim>(3));
