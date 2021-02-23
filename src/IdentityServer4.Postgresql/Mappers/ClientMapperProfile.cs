@@ -1,6 +1,8 @@
 using AutoMapper;
 using IdentityServer4.Contrib.Postgresql.Entities;
 using System.Linq;
+using IdentityServer4.Models;
+using Client = IdentityServer4.Contrib.Postgresql.Entities.Client;
 
 namespace IdentityServer4.Contrib.Postgresql.Mappers
 {
@@ -18,6 +20,8 @@ namespace IdentityServer4.Contrib.Postgresql.Mappers
                 .ForMember(x => x.ClientSecrets, opt => opt.MapFrom(src => src.ClientSecrets.Select(x => x)))
                 .ForMember(x => x.IdentityProviderRestrictions,
                     opt => opt.MapFrom(src => src.IdentityProviderRestrictions.Select(x => x.Provider)))
+                .ForMember(x => x.Claims, 
+                    opt => opt.MapFrom(src => src.Claims.Select(x => new IdentityServer4.Models.ClientClaim {Type = x.Type, Value = x.Value, ValueType = x.ValueType})))
                 .ForMember(x => x.AllowedCorsOrigins,
                     opt => opt.MapFrom(src => src.AllowedCorsOrigins.Select(x => x.Origin)));
 
@@ -42,6 +46,7 @@ namespace IdentityServer4.Contrib.Postgresql.Mappers
                     opt =>
                         opt.MapFrom(
                             src => src.IdentityProviderRestrictions.Select(x => new ClientIdPRestriction { Provider = x })))
+                .ForMember(x => x.Claims, opt => opt.MapFrom(src => src.Claims.Select(clientClaim => new Entities.ClientClaim { Type = clientClaim.Type, Value = clientClaim.Value, ValueType = clientClaim.ValueType} )))
                 .ForMember(x => x.AllowedCorsOrigins,
                     opt => opt.MapFrom(src => src.AllowedCorsOrigins.Select(x => new ClientCorsOrigin { Origin = x })));
             CreateMap<Models.Secret, ClientSecret>(MemberList.Source);

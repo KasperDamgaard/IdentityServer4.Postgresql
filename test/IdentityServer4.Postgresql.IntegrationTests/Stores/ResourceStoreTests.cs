@@ -22,7 +22,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			using (var session = db.Store.LightweightSession())
 			{
 				session.Store(apiResource);
-				session.SaveChanges();
+				await session.SaveChangesAsync();
 			}
 			using (var session = db.Store.LightweightSession())
 			{
@@ -44,7 +44,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			using (var session = db.Store.LightweightSession())
 			{
 				session.StoreObjects(apiResources);
-				session.SaveChanges();
+				await session.SaveChangesAsync();
 			}
 			using (var session = db.Store.LightweightSession())
 			{
@@ -64,7 +64,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			using (var session = db.Store.LightweightSession())
 			{
 				session.StoreObjects(resources);
-				session.SaveChanges();
+				await session.SaveChangesAsync();
 			}
 			using (var session = db.Store.LightweightSession())
 			{
@@ -92,7 +92,7 @@ namespace IdentityServer4.Contrib.Postgresql.IntegrationTests.Stores
 			{
 				session.StoreObjects(resources);
 				session.StoreObjects(apiResources);
-				session.SaveChanges();
+				await session.SaveChangesAsync();
 			}
 			using (var session = db.Store.LightweightSession())
 			{
